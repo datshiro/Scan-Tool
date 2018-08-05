@@ -17,7 +17,8 @@
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/simple-sidebar.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
-    <link rel='shortcut icon' href="{{ url_for('static', filename='img/favicon.jpg') }}" type='image/x-icon'/ >    
+    <link rel='shortcut icon' href="{{ url_for('static', filename='img/favicon.jpg') }}" type='image/x-icon'/ >
+
     <script type="text/javascript" src="{{ url_for('static', filename='js/process_scan.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/html2pdf.js') }}"></script>
@@ -47,6 +48,9 @@
                 <li>
                     <a href="contact" id="contact">Contact</a>
                 </li>
+                <li>
+                    <a href="login" id="login">Login</a>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -66,15 +70,8 @@
                         <div class="checkbox">
                             <label><input type="checkbox" value="sql_injection">SQL Injection</label>
                         </div>
-                        
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="sql_blind_injection" >Bind-SQL Injection</label>
-                        </div>
                         <div class="checkbox">
                             <label><input type="checkbox" value="xss">XSS Injection</label>
-                        </div>                        
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="file_upload">File Upload</label>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox" value="port_scan">Port Scan</label>

@@ -14,8 +14,6 @@ from config import COOKIE_NAME_DVWA, COOKIE_VALUE_DVWA
 from scan.scan_xss import scan_xss
 from scan.scan_port import scan_port
 from scan.scan_sql import scan_sql
-from scan.scan_sql_blind import scan_sql_blind
-from scan.scan_file_upload import scan_file_upload
 
 scan_sql
 app = Flask(__name__)
@@ -38,9 +36,9 @@ def audit():
 	req_dict = request.form
 	list_scan = req_dict.getlist('list_scan')
 	if list_scan == None:
-		list_scan = ['xss', 'sql_injection', 'sql_blind_injection', 'file_upload', 'port_scan']
-	#list_scan = ['xss', 'sql_injection', 'port_scan', 'file_upload']
-	#list_scan = ['xss', 'sql_injection', 'file_upload']
+		list_scan = ['xss', 'sql_injection', 'port_scan']
+	#list_scan = ['xss', 'sql_injection', 'port_scan']
+	#list_scan = ['xss', 'sql_injection']
 	#list_scan = ['port_scan']
 	url = req_dict.getlist('url')[0]
 
@@ -53,12 +51,7 @@ def audit():
 	# khoi tao global variable
 	xss_vul = {}
 	sql_vul = {}
-	sql_blind_vul = {}
-	fi_vul = {}
-	file_upload_vul = {}
 	port_vul = {}
-	ssl_vul = {}
-	csrf = {}
 	_404 = {}
 	#
 	# process pentest
@@ -89,19 +82,7 @@ def audit():
 			sql_vul = scan_sql(session=session, url=url, list_href=list_href)
 			result['sql'] = sql_vul
 			print result
-		elif scan == 'sql_blind_injection':
-			bypass_login(session, url, cookies)
-			print 'scan_sql_blind ...'
-			sql_blind_vul = scan_sql_blind(session=session, url=url, list_href=list_href)
-			result['sql_blind'] = sql_blind_vul
-			print result
 			print '#'*100
-		elif scan == 'file_upload':
-			bypass_login(session, url, cookies)
-			print 'scan_file_upload ...'
-			file_upload_vul = scan_file_upload(session=session, url=url, list_href=list_href)
-			result['file_upload'] = file_upload_vul
-			print result
 		elif scan == 'port_scan':
 			port_vul = scan_port(session=session, name=info['host'], url=url)
 			result['port'] = port_vul
@@ -112,12 +93,6 @@ def audit():
 	print '*'*10
 	print 'sql:'
 	print sql_vul
-	print '='*10
-	print 'sql_blind:'
-	print sql_blind_vul
-	print '='*10
-	print 'file_upload:'
-	print file_upload_vul
 	print '='*10
 	print 'port_scan:'
 	print port_vul
@@ -131,10 +106,11 @@ def audit():
 	print result
 	return jsonify({'result':result})
 
+
 @app.route('/test')
 def test():
 	return jsonify({'result': 'test'})	
 
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=9999)
-    

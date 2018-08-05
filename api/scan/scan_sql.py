@@ -84,12 +84,14 @@ def scan_form_sql(session, url, data_form, payload):
             url = url + '/' + action.rstrip('?')
         method = data_form.get('method', '')    
         try:
+            print("url", url)
             if method.lower() == 'get':
-                
+
                 re = session.get(url, params = data_form['data'], cookies=cookies)
             elif method.lower() == 'post':
-                
+
                 re = session.post(url, data = data_form['data'], cookies=cookies)
+                print("re", re.content)
         except:
             return
         for error in notification_error:
@@ -108,7 +110,6 @@ def scan_sql(session, url, list_href):
     for href in list_href:
         flag_level = 0
         for level in ['high', 'medium', 'low']:
-
             payloads = payload_sql[level]['payload']
             for payload in payloads:
                 #
@@ -129,6 +130,7 @@ def scan_sql(session, url, list_href):
                 soup = BeautifulSoup(req_sql.content,'html.parser')
                 form = soup.find('form')
                 data_form = get_info_form(form, payload)
+                print("data_form", data_form, href)
                 if data_form:
                     result_form = scan_form_sql(session, href, data_form, payload)
                     if result_form and convert_tag(form) not in sql_vul['form']['list']:

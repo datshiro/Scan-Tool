@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/simple-sidebar.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+    <link rel='shortcut icon' href="{{ url_for('static', filename='img/favicon.jpg') }}" type='image/x-icon'/ >
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jspdf.debug.js') }}"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+    <title>Login SQL Injection</title>
+</head>
+<body>
+    <form method="post">
+        <label>Username: </label>
+        <input name="username" id="username" type="text">
+        <!--<label>Password: </label>-->
+        <!--<input name="password" id="password" type="password">-->
+        <input type="submit">submit</input>
+    </form>
+    <div class="result">
+        {% if output != None %}
+            <b>{{output}}</b>
+        {% endif %}
+    </div>
+</body>
+</html>

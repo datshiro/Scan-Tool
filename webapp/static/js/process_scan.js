@@ -77,18 +77,22 @@ $(document).ready(function(){
                 data: [{
                     name: 'XSS Injection',
                     y: _xss
-                }, {
-                    name: 'Blind SQL Injection',
-                    y: _sql_blind,
-                    sliced: true,
-                    selected: true
-                }, {
+                },
+//                {
+//                    name: 'Blind SQL Injection',
+//                    y: _sql_blind,
+//                    sliced: true,
+//                    selected: true
+//                },
+                {
                     name: 'SQL Injection',
                     y: _sql
-                }, {
-                    name: 'File Upload',
-                    y: _file_upload
-                },{
+                },
+//                {
+//                    name: 'File Upload',
+//                    y: _file_upload
+//                },
+                {
                     name: 'Port Insecure',
                     y: _port_insecure
                 },{
