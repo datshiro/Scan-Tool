@@ -1,0 +1,3 @@
+BeautifulSoup
+Flask
+python-nmap
